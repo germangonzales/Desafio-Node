@@ -42,24 +42,40 @@ export class ProvaTesteComponent {
 			/**
 			 * Monte a mensagem de erro avisando que já existe um Livro cadastrado sobre o nome e genero passados
 			 */
+			const alert = ("Já existe um livro com nome '" + nome + "' de genero '" + genero + "' cadastrado!")
+			alert.toLocaleLowerCase();
 		}
 	}
 
-	buscarLivro(livro: string, genero: string): number{
+	buscarLivro(nome: string, genero: string): number{
 		let indiceLivro: number = -1
 		for (let index = 0; index < this.listLivros.length; index++) {
 			const livro = this.listLivros[index]
 			/**
              * Implemente a validação onde retorne o Indice do Livro caso encontre um com mesmo nome e genero
              */
+			if (nome == livro.nome && genero == livro.genero){
+				indiceLivro = index
+				return indiceLivro
+			}else{
+				return null;
+			}
 		}
-		return indiceLivro
 	}
 
 	listarLivrosFantasia(): string{
 		/**
 		 * Retorne uma String contendo o nome de todos os Livros que são de fantasia.
 		 */
+		const fAntasia: Array<string> = []
+
+		this.listLivros.forEach(item =>{
+			if(item.genero === 'Fantasia'){
+				fAntasia.push(item.nome)
+			}
+		})
+
+		return fAntasia.toString();
 	}
 }
 
